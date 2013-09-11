@@ -26,6 +26,7 @@ get '/auth' do
     end
   else
     session[:user_id] = User.find_by_username(@access_token.params[:screen_name]).id
+    erb :index
   end
   
 end
