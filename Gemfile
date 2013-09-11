@@ -18,8 +18,8 @@ gem 'shotgun'
 
 gem 'oauth'
 gem 'twitter'
+gem 'rspec'
 
 group :test do
   gem 'faker'
-  gem 'rspec'
 end
