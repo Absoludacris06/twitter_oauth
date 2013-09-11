@@ -22,6 +22,7 @@ require 'erb'
 
 require 'oauth'
 require 'twitter'
+require 'yaml'
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
@@ -35,7 +36,18 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
 
+# Configure twitter API
+twitter_config = YAML.load_file(APP_ROOT.join('config', 'keys.yaml'))
+
+twitter_config.each do |k, v|
+	ENV[k] = v
+end
+
 Twitter.configure do |config|
   config.consumer_key = ENV['TWITTER_KEY']
   config.consumer_secret = ENV['TWITTER_SECRET']
 end
+
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
+# http://noivnoiwierljs.com
