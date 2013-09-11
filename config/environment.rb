@@ -37,17 +37,15 @@ Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
 require APP_ROOT.join('config', 'database')
 
 # Configure twitter API
-twitter_config = YAML.load_file(APP_ROOT.join('config', 'keys.yaml'))
+# twitter_config = YAML.load_file(APP_ROOT.join('config', 'keys.yaml'))
 
-twitter_config.each do |k, v|
-	ENV[k] = v
-end
+# twitter_config.each do |k, v|
+# 	ENV[k] = v
+# end
 
 Twitter.configure do |config|
   config.consumer_key = ENV['TWITTER_KEY']
   config.consumer_secret = ENV['TWITTER_SECRET']
 end
 
-OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-
-# http://noivnoiwierljs.com
+# OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
